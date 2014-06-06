@@ -23,6 +23,15 @@ namespace DOJ {
 			sprintf(sub_str, "%d", sub_id);
 			
 			printf("Judging ProID=%s, SubID=%s\n", pro_str, sub_str);
+			printf("Clearing for SubID=%s\n", sub_str);
+			
+			char bin[255] = "./sub/";
+			strcat(bin, sub_str);
+			strcat(bin, "/DOJ_SUB");
+			strcat(bin, sub_str);
+			strcat(bin, ".exe");
+			
+			remove(bin);
 			
 			pid = fork();
 			if(pid == 0){
@@ -35,6 +44,13 @@ namespace DOJ {
 			pid = wait(&status);
 			
 			printf("Compile complete\n");
+			
+			printf("Checking file: %s\n", bin);
+			if(access(bin, F_OK) == -1){
+				// CE, binary file does not exist
+				printf("Result: CE - no executable file\n");
+				return;
+			}
 			
 			exec_pid = fork();
 			if(exec_pid == 0){
