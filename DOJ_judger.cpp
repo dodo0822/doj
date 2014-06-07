@@ -22,8 +22,7 @@ namespace DOJ {
 			sprintf(pro_str, "%d", pro_id);
 			sprintf(sub_str, "%d", sub_id);
 			
-			printf("Judging ProID=%s, SubID=%s\n", pro_str, sub_str);
-			printf("Clearing for SubID=%s\n", sub_str);
+			printf("[judger] judging ProID=%s, SubID=%s\n", pro_str, sub_str);
 			
 			char bin[255] = "./sub/";
 			strcat(bin, sub_str);
@@ -39,16 +38,13 @@ namespace DOJ {
 				exit(0);
 			}
 			
-			printf("Waiting for process %d\n", pid);
-			
 			pid = wait(&status);
 			
-			printf("Compile complete\n");
+			puts("[judger] compile complete");
 			
-			printf("Checking file: %s\n", bin);
 			if(access(bin, F_OK) == -1){
 				// CE, binary file does not exist
-				printf("Result: CE - no executable file\n");
+				puts("[judger] Result: CE - no executable file");
 				return;
 			}
 			
@@ -58,7 +54,7 @@ namespace DOJ {
 				exit(0);
 			}
 			
-			printf("Waiting for process %d\n", exec_pid);
+			printf("[judger] executing - Waiting for process %d\n", exec_pid);
 			
 			void (*prev_handler)(int);
 			prev_handler = signal(SIGALRM, catch_alarm);
@@ -67,7 +63,7 @@ namespace DOJ {
 			
 			exec_pid = wait(&status);
 			
-			printf("Execute complete\n");
+			puts("[judger] execute complete");
 			
 			if(!TLE){
 			
@@ -83,7 +79,7 @@ namespace DOJ {
 				FILE* answer_file = fopen(answer_txt, "r");
 				
 				if(output_file == NULL){
-					puts("Result: WA - no output");
+					puts("[judger] Result: WA - no output");
 					return;
 				}
 				
@@ -109,9 +105,9 @@ namespace DOJ {
 				}
 				if(fgets(answer_line, 65535, answer_file) != NULL) ok = false;
 				if(ok){
-					puts("Result: AC");
+					puts("[judger] Result: AC");
 				} else {
-					puts("Result: WA");
+					puts("[judger] Result: WA");
 				}
 			}
 		}

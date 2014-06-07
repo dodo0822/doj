@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <cstring>
 
-void compile(char* subID);
+namespace DOJ {
+	void compile(char* subID);
+}
 
 #endif

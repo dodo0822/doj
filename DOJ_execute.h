@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <unistd.h>
 
-void execute(char* proID, char* subID);
+namespace DOJ {
+	void execute(char* proID, char* subID);
+}
 
 #endif
