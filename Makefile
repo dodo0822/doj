@@ -1,8 +1,8 @@
 # DOJ core Makefile
-all: judger.cpp
+all: DOJ.cpp
 	mkdir -p out
-	g++ judger.cpp DOJ_compile.cpp DOJ_execute.cpp DOJ_judger.cpp -o out/judger
+	g++ DOJ.cpp DOJ_compile.cpp DOJ_execute.cpp DOJ_judger.cpp -o out/DOJ
 
 clean:
-	rm -f out/judger
+	rm -f out/DOJ
 

@@ -1,14 +1,8 @@
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <unistd.h>
-#include "DOJ_judger.h"
+#include "DOJ.h"
 
 using namespace DOJ;
 
-int main(){
+int main(int argc, char** argv){
 	int sock_fd, newsock_fd, portnum = 22022;
 	socklen_t clilen;
 	char buf[256];
